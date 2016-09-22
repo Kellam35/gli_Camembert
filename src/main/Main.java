@@ -9,6 +9,7 @@ import view.IView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -16,7 +17,9 @@ public class Main {
 
 		IModel model = new Model("Budget");
 		Camembert view= new Camembert(model,"Budget");
-		Controller controller = new Controller(model,view);
+		Controller controller = new Controller(model);
+		controller.addView(view);
+		//controller.addView(null);
 		controller.addItem(new Item("test1","description1",42));
 		controller.addItem(new Item("test2","description2",52));
 		controller.addItem(new Item("test3","description3",62));

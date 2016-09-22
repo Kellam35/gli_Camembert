@@ -4,30 +4,33 @@ import model.IModel;
 import model.Item;
 import view.IView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller implements IModel {
 
 	private IModel model;
-	private IView view;
+	private List<IView> views;
 
-	public Controller(IModel model, IView view) {
+	public Controller(IModel model) {
 		this.model = model;
-		this.view = view;
-		view.setController(this);
-
+		this.views = new ArrayList<>();
 	}
 
 	@Override
 	public void setName(String name) {
 		model.setName(name);
-		view.notifyChange();
+		for (IView view : views) {
+			view.notifyChange();
+		}
 	}
 
 	@Override
 	public void setItems(List<Item> items) {
 		model.setItems(items);
-		view.notifyChange();
+		for (IView view : views) {
+			view.notifyChange();
+		}
 	}
 
 	@Override
@@ -43,13 +46,17 @@ public class Controller implements IModel {
 	@Override
 	public void addItem(Item item) {
 		model.addItem(item);
-		view.notifyChange();
+		for (IView view : views) {
+			view.notifyChange();
+		}
 	}
 
 	@Override
 	public void removeItem(Item item) {
 		model.removeItem(item);
-		view.notifyChange();
+		for (IView view : views) {
+			view.notifyChange();
+		}
 	}
 
 	@Override
@@ -58,6 +65,12 @@ public class Controller implements IModel {
 	}
 
 	public void onClickEvent( ){
-		view.notifyChange();
+		for (IView view : views) {
+			view.notifyChange();
+		}
+	}
+	public void addView(IView view ){
+		views.add(view);
+		view.setController(this);
 	}
 }

@@ -38,6 +38,8 @@ public class Camembert extends JComponent implements MouseListener,IView{
 	protected void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 
+		Dimension size = getSize();
+
 		int compteurItems=0;
 		double pourcentage;
 		double angleDepart = 0;
@@ -45,6 +47,10 @@ public class Camembert extends JComponent implements MouseListener,IView{
 		Graphics2D g2d;
 
 		g2d = (Graphics2D) graphics;
+
+		Rectangle window = new Rectangle(0,0,size.width,size.height);
+		g2d.setColor(Color.white);
+		g2d.fill(window);
 
 		Rectangle bigRectangle= new Rectangle(0,0,500,500);
 		Rectangle smallRectangle = new Rectangle(50,50,400,400);

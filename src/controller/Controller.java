@@ -64,9 +64,9 @@ public class Controller implements IModel {
 		return model.getTotal();
 	}
 
-	public void onClickEvent( ){
+	public void onClickEvent( int id){
 		for (IView view : views) {
-			view.notifyChange();
+			view.notifyItemSelected(id);
 		}
 	}
 	public void addView(IView view ){
@@ -77,6 +77,12 @@ public class Controller implements IModel {
 	public void update(){
 		for (IView view : views) {
 			view.notifyChange();
+		}
+	}
+
+	public void setIdArd (int id){
+		for (IView view: views){
+			view.notifyItemSelected(id);
 		}
 	}
 }

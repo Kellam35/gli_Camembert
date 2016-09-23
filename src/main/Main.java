@@ -7,8 +7,11 @@ import model.Model;
 import model.TableAdapter;
 import view.Camembert;
 import view.IView;
+import view.JTableView;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,17 +23,19 @@ public class Main {
 
 		IModel model = new Model("Budget");
 		Camembert view= new Camembert(model,"Budget");
-		IView table = new TableAdapter(model);
+		TableAdapter tableAdapter = new TableAdapter(model);
+		JTableView table = new JTableView(tableAdapter);
 		Controller controller = new Controller(model);
+		tableAdapter.setController(controller);
 		controller.addView(view);
 		controller.addView(table);
-		controller.addItem(new Item("test1","description1",42));
-		controller.addItem(new Item("test2","description2",52));
-		controller.addItem(new Item("test3","description3",62));
-		controller.addItem(new Item("test4","description4",30));
-		controller.addItem(new Item("test5","description5",34));
-		controller.addItem(new Item("test6","description6",90));
-		controller.addItem(new Item("test7","description7",3));
+		controller.addItem(new Item("test1","c'est l'item1",42));
+		controller.addItem(new Item("test2","The Game",52));
+		controller.addItem(new Item("test3","c'est l'item3",62));
+		controller.addItem(new Item("test4","42",30));
+		controller.addItem(new Item("test5","Moi c'est Bobby",34));
+		controller.addItem(new Item("test6","LA RUSSIE",90));
+		controller.addItem(new Item("test7","c'est l'item7",3));
 		controller.addItem(new Item("test8","description8",17));
 		controller.addItem(new Item("test9","description9",39));
 		controller.addItem(new Item("test10","description10",20));
@@ -47,28 +52,25 @@ public class Main {
 	//3. Create components and put them in the frame.
 	//...create emptyLabel...
 
-	//	JScrollPane scrollPane = new JScrollPane((JTable)table);
-	//	JPanel panelTable = new JPanel();
-	//	panelTable.add(scrollPane);
-		JTable jTable= new JTable((TableModel) table);
-		JScrollPane scrollPane = new JScrollPane(jTable);
+		JScrollPane scrollPane = new JScrollPane(table);
 		JPanel panelTable = new JPanel();
 		panelTable.add(scrollPane);
 		panelTable.add(add);
 		panelTable.add(remove);
 
-		add.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controller.addItem(new Item("name","description",1));
+		add.addActionListener(e -> controller.addItem(new Item("name","description",1)));
+
+		remove.addActionListener(e -> {
+			int[] selected = (table.getSelectedRows());
+			for (int i = 0; i<selected.length;i++) {
+				controller.removeItem(selected[0]);
 			}
 		});
 
-		remove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int[] selected = jTable.getSelectedRows();
-				for (int i = 0; i<selected.length;i++) {
-					controller.removeItem(selected[0]);
-				}
+		table.getSelectionModel().addListSelectionListener(event -> {
+			int select = table.getSelectedRow();
+			if (select > -1) {
+				controller.setIdArd(select);
 			}
 		});
 

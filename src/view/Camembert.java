@@ -22,11 +22,11 @@ public class Camembert extends JComponent implements MouseListener,IView{
 	private java.util.List<Arc2D.Double> arcs;
 	private int idArc = -1;
 	private Ellipse2D.Double circleWhite;
-	private int[] xDroite = {480,480,490};
-	private int[] yDroite = {50,70,60};
+	private int[] xDroite = {495,475,485};
+	private int[] yDroite = {65,65,55};
 	private Polygon flecheDroite = new Polygon(xDroite,yDroite,3);
-	private int[] xGauche = {475,475,465};
-	private int[] yGauche = {50,70,60};
+	private int[] xGauche = {495,475,485};
+	private int[] yGauche = {70,70,80};
 	private Polygon flecheGauche = new Polygon(xGauche,yGauche,3);
 
 	public Camembert(IModel model, String titre) {
@@ -155,7 +155,7 @@ public class Camembert extends JComponent implements MouseListener,IView{
 		if(!click){
 			idArc=-1;
 		}
-		controller.onClickEvent();
+		controller.onClickEvent(idArc);
 	}
 
 	@Override
@@ -171,5 +171,10 @@ public class Camembert extends JComponent implements MouseListener,IView{
 	@Override
 	public void mouseExited(MouseEvent mouseEvent) {
 
+	}
+
+	public void notifyItemSelected(int id){
+		idArc=id;
+		notifyChange();
 	}
 }

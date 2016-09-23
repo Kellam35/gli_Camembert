@@ -1,11 +1,11 @@
 package model;
 
 import controller.Controller;
-import view.IView;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TableAdapter extends AbstractTableModel implements IView{
+public class TableAdapter extends AbstractTableModel{
+
 
 	private IModel model;
 	private Controller controller;
@@ -13,6 +13,10 @@ public class TableAdapter extends AbstractTableModel implements IView{
 
 	public TableAdapter(IModel model) {
 		this.model = model;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 
 	@Override
@@ -55,15 +59,5 @@ public class TableAdapter extends AbstractTableModel implements IView{
 	@Override
 	public boolean isCellEditable(int i, int i1) {
 		return true;
-	}
-
-	@Override
-	public void notifyChange() {
-		fireTableDataChanged();
-	}
-
-	@Override
-	public void setController(Controller controller) {
-		this.controller=controller;
 	}
 }

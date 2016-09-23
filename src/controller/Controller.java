@@ -73,4 +73,10 @@ public class Controller implements IModel {
 		views.add(view);
 		view.setController(this);
 	}
+
+	public void update(){
+		for (IView view : views) {
+			view.notifyChange();
+		}
+	}
 }

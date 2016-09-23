@@ -1,10 +1,15 @@
 package model;
 
+import controller.Controller;
+import view.IView;
+
 import javax.swing.table.AbstractTableModel;
 
-public class TableAdapter extends AbstractTableModel{
+public class TableAdapter extends AbstractTableModel implements IView{
 
 	private IModel model;
+	private Controller controller;
+	private String titre[] = {"Name","Amount","Description"};
 
 	public TableAdapter(IModel model) {
 		this.model = model;
@@ -22,17 +27,43 @@ public class TableAdapter extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		if(column==1){
-			return model.getItems().get(row).getName();
-		}
-		else if (column==2)
-		{
-			return model.getItems().get(row).getValue();
-		}else if (column==3)
-		{
-			return model.getItems().get(row).getDescription();
-		}else {return null;}
+		switch (column){
+			case 0 : return model.getItems().get(row).getName();
+			case 1 : return model.getItems().get(row).getValue();
+			case 2 : return model.getItems().get(row).getDescription();
+			default : return null;}
 	}
 
+	@Override
+	public void setValueAt(Object o, int row, int column) {
+		switch (column) {
+			case 0:
+				model.getItems().get(row).setName((String) o);break;
+			case 1:
+				model.getItems().get(row).setValue(Integer.parseInt(o.toString()));break;
+			case 2:
+				model.getItems().get(row).setDescription((String) o);break;
+		}
+		controller.update();
+	}
 
+	@Override
+	public String getColumnName(int i) {
+		return titre[i];
+	}
+
+	@Override
+	public boolean isCellEditable(int i, int i1) {
+		return true;
+	}
+
+	@Override
+	public void notifyChange() {
+
+	}
+
+	@Override
+	public void setController(Controller controller) {
+		this.controller=controller;
+	}
 }

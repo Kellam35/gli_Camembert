@@ -1,7 +1,6 @@
 package view;
 
 import controller.Controller;
-import model.IModel;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -33,6 +32,8 @@ public class JTableView extends JTable implements IView {
 			selected = id;
 			if (selected != -1) {
 				setRowSelectionInterval(id, id);
+			} else {
+				clearSelection();
 			}
 		}
 	}

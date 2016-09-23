@@ -6,16 +6,10 @@ import model.Item;
 import model.Model;
 import model.TableAdapter;
 import view.Camembert;
-import view.IView;
 import view.JTableView;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
 
@@ -46,11 +40,8 @@ public class Main {
 		JButton add = new JButton("add");
 		JButton remove = new JButton("remove");
 
-	//2. Optional: What happens when the frame closes?
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	//3. Create components and put them in the frame.
-	//...create emptyLabel...
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		JPanel panelTable = new JPanel();
@@ -70,7 +61,7 @@ public class Main {
 		table.getSelectionModel().addListSelectionListener(event -> {
 			int select = table.getSelectedRow();
 			if (select > -1) {
-				controller.setIdArd(select);
+				controller.setSelected(select);
 			}
 		});
 
@@ -82,11 +73,9 @@ public class Main {
 
 		frame.getContentPane().add(splitpane, BorderLayout.CENTER);
 
-	//4. Size the frame.
 		frame.setMinimumSize(new Dimension(1220,600));
 		frame.pack();
 
-	//5. Show it.
 		frame.setVisible(true);
 	}
 }

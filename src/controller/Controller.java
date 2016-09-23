@@ -18,6 +18,11 @@ public class Controller implements IModel {
 	}
 
 	@Override
+	public String getName() {
+		return model.getName();
+	}
+
+	@Override
 	public void setName(String name) {
 		model.setName(name);
 		for (IView view : views) {
@@ -26,21 +31,16 @@ public class Controller implements IModel {
 	}
 
 	@Override
+	public List<Item> getItems() {
+		return model.getItems();
+	}
+
+	@Override
 	public void setItems(List<Item> items) {
 		model.setItems(items);
 		for (IView view : views) {
 			view.notifyChange();
 		}
-	}
-
-	@Override
-	public String getName() {
-		return model.getName();
-	}
-
-	@Override
-	public List<Item> getItems() {
-		return model.getItems();
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class Controller implements IModel {
 		}
 	}
 
-	public void setIdArd (int id){
+	public void setSelected(int id) {
 		for (IView view: views){
 			view.notifyItemSelected(id);
 		}

@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Camembert extends JComponent implements MouseListener,IView{
@@ -154,6 +154,7 @@ public class Camembert extends JComponent implements MouseListener,IView{
 
 		if(!click){
 			idArc=-1;
+			controller.setSelected(-1);
 		}
 		controller.onClickEvent(idArc);
 	}

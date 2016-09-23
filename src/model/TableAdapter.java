@@ -19,6 +19,7 @@ public class TableAdapter extends AbstractTableModel{
 		this.controller = controller;
 	}
 
+
 	@Override
 	public int getRowCount() {
 		return model.getItems().size();

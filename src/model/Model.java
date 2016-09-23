@@ -41,8 +41,8 @@ public class Model implements IModel{
 	}
 
 	@Override
-	public void removeItem(Item item) {
-		items.remove(item);
+	public void removeItem(int i) {
+		items.remove(i);
 	}
 
 	@Override

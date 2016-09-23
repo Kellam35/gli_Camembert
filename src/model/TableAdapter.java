@@ -38,11 +38,11 @@ public class TableAdapter extends AbstractTableModel implements IView{
 	public void setValueAt(Object o, int row, int column) {
 		switch (column) {
 			case 0:
-				model.getItems().get(row).setName((String) o);break;
+				model.getItems().get(row).setName(o.toString());break;
 			case 1:
 				model.getItems().get(row).setValue(Integer.parseInt(o.toString()));break;
 			case 2:
-				model.getItems().get(row).setDescription((String) o);break;
+				model.getItems().get(row).setDescription(o.toString());break;
 		}
 		controller.update();
 	}
@@ -59,7 +59,7 @@ public class TableAdapter extends AbstractTableModel implements IView{
 
 	@Override
 	public void notifyChange() {
-
+		fireTableDataChanged();
 	}
 
 	@Override

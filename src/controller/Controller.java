@@ -52,8 +52,8 @@ public class Controller implements IModel {
 	}
 
 	@Override
-	public void removeItem(Item item) {
-		model.removeItem(item);
+	public void removeItem(int i) {
+		model.removeItem(i);
 		for (IView view : views) {
 			view.notifyChange();
 		}

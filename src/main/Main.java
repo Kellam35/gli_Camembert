@@ -7,12 +7,12 @@ import model.Model;
 import model.TableAdapter;
 import view.Camembert;
 import view.IView;
-import view.JTableView;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
 
@@ -38,6 +38,9 @@ public class Main {
 		//1. Create the frame.
 		JFrame frame = new JFrame("Camembert");
 
+		JButton add = new JButton("add");
+		JButton remove = new JButton("remove");
+
 	//2. Optional: What happens when the frame closes?
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,6 +54,23 @@ public class Main {
 		JScrollPane scrollPane = new JScrollPane(jTable);
 		JPanel panelTable = new JPanel();
 		panelTable.add(scrollPane);
+		panelTable.add(add);
+		panelTable.add(remove);
+
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.addItem(new Item("name","description",1));
+			}
+		});
+
+		remove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int[] selected = jTable.getSelectedRows();
+				for (int i = 0; i<selected.length;i++) {
+					controller.removeItem(selected[0]);
+				}
+			}
+		});
 
 		JSplitPane splitpane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,view,panelTable);
 		splitpane.setDividerLocation(750);

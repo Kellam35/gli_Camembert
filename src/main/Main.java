@@ -56,6 +56,7 @@ public class Main {
 			for (int i = 0; i<selected.length;i++) {
 				controller.removeItem(selected[0]);
 			}
+			controller.setSelected(-1);
 		});
 
 		table.getSelectionModel().addListSelectionListener(event -> {

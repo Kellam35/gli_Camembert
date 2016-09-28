@@ -28,7 +28,7 @@ public class JTableView extends JTable implements IView {
 
 	@Override
 	public void notifyItemSelected(int id) {
-		if(selected!= id) {
+		if (selected < id) {
 			selected = id;
 			if (selected != -1) {
 				setRowSelectionInterval(id, id);
